@@ -1,0 +1,21 @@
+apiVersion: radix.equinor.com/v1
+kind: RadixApplication
+metadata:
+  name: git-submodule-test
+spec:
+  environments:
+    - name: dev
+      build:
+        from: master
+  components:
+    - name: www
+      src: "."
+      ports:
+        - name: http
+          port: 8080
+      publicPort: http
+      environmentConfig:
+        - environment: dev
+  dnsAppAlias:
+    environment: dev
+    component: www
